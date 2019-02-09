@@ -15,7 +15,6 @@ class Line {
         Line();
         Line(Point P1, Point P2);
         Line(const Line &L);
-        ~Line();
         
         /* Getter and Setter */
         Point getP1() const;            /* Get First Point */

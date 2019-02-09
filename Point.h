@@ -14,7 +14,6 @@ class Point {
         Point();
         Point(unsigned int x, unsigned int y, unsigned int z);
         Point(const Point &P);
-        ~Point();
 
         /* Getter and Setter */
         unsigned int getAbsis() const;

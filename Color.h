@@ -16,7 +16,6 @@ class Color {
         Color();
         Color(unsigned char a, unsigned char r, unsigned char g, unsigned char b);
         Color(const Color &C);
-        ~Color();
         
         /* Getter and Setter */
         unsigned char getAlpha() const;
