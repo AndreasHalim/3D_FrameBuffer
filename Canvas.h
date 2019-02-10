@@ -23,6 +23,14 @@ class Canvas {
 	public:
 		Canvas();
 		~Canvas();
+		char *getFrameBuffer();
+		int getFrameBufferDevice();
+		long int getScreenMemorySize();
+		int getXRes();
+		int getYRes();
+		int getColorDepth();
+		unsigned int getLineLength();
+
 };
 
 #endif

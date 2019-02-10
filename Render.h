@@ -16,18 +16,18 @@ class Render {
 	public:
 		/* Operator Empat Sekawan */
 		Render();
-		Render(Canvas screen);
 		Render(const Render &R);
 		
 		/* Getter and Setter */
 		Canvas getScreen() const;
-		void setScreen(Canvas screen);
 		
 		/* Function and Procedure */
-		void draw_line(Line L, Color C);
-		void draw_shape(Shape S, Color C);
-		void color_shape(Shape S);
-	
+		void drawPoint(Point P, Color C);
+		void drawLine(Line L, Color C);
+		void drawFullShape(Shape S, Color C);
+		void drawEmptyShape(Shape S, Color C);
+		void colorShape(Shape S, Color C);
+		void clearScreen();	
 };
 
 #endif

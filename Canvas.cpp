@@ -1,7 +1,6 @@
 #include "Canvas.h"
 
 Canvas::Canvas(){
-    long int screen_memory_size = 0;
     // Open the file for reading and writing
     framebuffer_device = open(FRAMEBUFFER_DEVICE_LOCATION.c_str(), O_RDWR);
     if(framebuffer_device){
@@ -23,4 +22,28 @@ Canvas::~Canvas(){
     munmap(framebuffer, screen_memory_size);
     ioctl(framebuffer_device, FBIOPUT_VSCREENINFO, &orig_vinfo);
     close(framebuffer_device);
+}
+
+char *Canvas::getFrameBuffer(){
+    return framebuffer;
+}
+int Canvas::getFrameBufferDevice(){
+    return framebuffer_device;
+}
+long int Canvas::getScreenMemorySize(){
+    return screen_memory_size;
+}
+int Canvas::getXRes(){
+    return vinfo.xres;
+}
+int Canvas::getYRes(){
+    return vinfo.yres;
+}
+
+int Canvas::getColorDepth(){
+    return vinfo.bits_per_pixel;
+}
+
+unsigned int Canvas::getLineLength(){
+    return finfo.line_length;
 }
