@@ -26,7 +26,6 @@ class Render {
 		void drawLine(Line L, Color C);
 		void drawFullShape(Shape S, Color C);
 		void drawEmptyShape(Shape S, Color C);
-		void colorShape(Shape S, Color C);
 		void clearScreen();	
 };
 
