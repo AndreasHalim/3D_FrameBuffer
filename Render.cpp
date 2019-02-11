@@ -47,7 +47,6 @@ void Render::drawPoint(Point P, Color C){
 /** Function and Procedure **/
 void Render::drawLine(Line L, Color C) {
 	//int r = 255, g = 0, b = 0;
-	int z = 0;
 	int x_start = L.getP1().getAbsis(); //x0
 	int y_start = L.getP1().getOrdinat(); //y0
 	int x_end = L.getP2().getAbsis(); //x1
@@ -72,7 +71,7 @@ void Render::drawLine(Line L, Color C) {
 		}
 		int D = 2 * dx - dy, x = x_start;
 		for(int y = y_start; y <= y_end; ++y){
-			drawPoint(Point(x, y, z), C);
+			drawPoint(Point(x, y), C);
 			if(D > 0){
 				x = x + xi;
 				D = D - 2 * dy;
@@ -88,7 +87,7 @@ void Render::drawLine(Line L, Color C) {
 		}
 		int D = 2 * dy - dx, y = y_start;
 		for(int x = x_start; x <= x_end; ++x){
-			drawPoint(Point(x, y, z), C);
+			drawPoint(Point(x, y), C);
 			if(D > 0){
 				y = y + yi;
 				D = D - 2 * dx;
