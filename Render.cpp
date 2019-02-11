@@ -4,7 +4,7 @@
 #include <math.h>
 
 /** Operator Empat Sekawan **/
-Render::Render() {
+Render::Render():screen() {
 /* Default Constructor */
 }
 

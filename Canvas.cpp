@@ -13,12 +13,23 @@ Canvas::Canvas(){
                 // map fb to user mem 
                 screen_memory_size = vinfo.xres * vinfo.yres * vinfo.bits_per_pixel / 8;
                 framebuffer = (char*)mmap(0, screen_memory_size, PROT_READ | PROT_WRITE, MAP_SHARED, framebuffer_device, 0);
+                system("setterm -cursor off && /bin/stty raw -echo && clear");
+            }
+            else{
+                printf("error get fixed screen info\n");
             }
         }
+        else{
+            printf("error get var screen info\n");
+        }
+    }
+    else{
+        printf("error open fb\n");
     }
 }
 
 Canvas::~Canvas(){
+    system("/bin/stty -raw echo && clear");
     munmap(framebuffer, screen_memory_size);
     ioctl(framebuffer_device, FBIOPUT_VSCREENINFO, &orig_vinfo);
     close(framebuffer_device);

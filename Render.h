@@ -12,7 +12,9 @@
 class Render {
 	private:
 		Canvas screen; // Screen size
-		
+		enum state {RECEIVED, WAITING, STOP};
+		enum state isInput = WAITING;
+		char input;
 	public:
 		/* Operator Empat Sekawan */
 		Render();
