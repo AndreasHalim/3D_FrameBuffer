@@ -10,10 +10,10 @@ int main(){
     Point P1(0, 0);
     Point P2(700, 700);
     Line L(P1, P2);
-    /* R.loadAsset("ship.txt");
+    R.loadAsset("ship.txt");
     for(int i = 0; i < R.getAssetCount(); ++i){
         R.drawAsset(i);
-    } */
+    }
     for(;;){
         if(R.getTerminal().getIsInput() == State::RECEIVED){
             char input = R.getTerminal().getInput();
