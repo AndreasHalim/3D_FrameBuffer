@@ -22,7 +22,7 @@ class Render {
 		void drawLineLow(int x0, int y0, int x1, int y1, Color C);
 		void drawLineHigh(int x0, int y0, int x1, int y1, Color C);
 	public:
-		int offset_x = screen.getXRes() / 3, offset_y = screen.getYRes() / 2; 
+		int offset_x = 0, offset_y = 0; 
 		/* Operator Empat Sekawan */
 		Render();
 		Render(const Render &R);
@@ -34,9 +34,9 @@ class Render {
 		void drawPoint(Point P, Color C);
 		void drawLine(Line L, Color C);
 		void loadAsset(char *filename);
-		void drawAsset(int idx);
+		void drawAsset(int idx, int x_start, int y_start);
 		void doMotion();
-		void drawFullShape(Shape S, Color C, Color Outline);
+		void drawFullShape(Shape S, Color C, Color Outline, int x_start, int y_start);
 		void drawEmptyShape(Shape S, Color Outline);
 		void clearScreen();	
 		Input getTerminal();

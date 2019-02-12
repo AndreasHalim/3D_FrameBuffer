@@ -2,6 +2,7 @@
 #include "Render.h"
 
 int main(){
+    Canvas screen;
     Render R;
     Color C1(0, 0, 0, 200);
     Color Outline1(0, 255, 255, 255);
@@ -11,8 +12,12 @@ int main(){
     Point P2(700, 700);
     Line L(P1, P2);
     R.loadAsset("ship.txt");
-    for(int i = 0; i < R.getAssetCount(); ++i){
-        R.drawAsset(i);
+    R.loadAsset("plane.txt");
+    for(int i = 0; i < 6; ++i){
+        R.drawAsset(i, screen.getXRes() / 3, screen.getYRes() / 2);
+    }
+    for(int i = 6; i < R.getAssetCount(); ++i){
+        R.drawAsset(i, 0, 0);
     }
     for(;;){
         if(R.getTerminal().getIsInput() == State::RECEIVED){

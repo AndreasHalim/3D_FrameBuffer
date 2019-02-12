@@ -172,16 +172,19 @@ void Render::loadAsset(char *filename){
 	
 }
 
-void Render::drawAsset(int idx){
-	drawFullShape(shapes[idx], fills[idx], outlines[idx]);
+void Render::drawAsset(int idx, int x, int y){
+	drawFullShape(shapes[idx], fills[idx], outlines[idx], x, y);
 }
 
-void Render::drawFullShape(Shape S, Color C, Color Outline) {
+void Render::drawFullShape(Shape S, Color C, Color Outline, int x_start, int y_start) {
 	/* if(!S.isClosed()){
 		return;
 	} */
 	for(int i = 0; i < S.getNeff(); ++i){
-		drawLine(S.getLineAt(i), Outline);
+		Point P_1(S.getLineAt(i).getP1().getAbsis()+x_start, S.getLineAt(i).getP1().getOrdinat()+y_start);
+		Point P_2(S.getLineAt(i).getP2().getAbsis()+x_start, S.getLineAt(i).getP2().getOrdinat()+y_start);
+
+		drawLine(Line(P_1, P_2), Outline);
 	}
 	Line L = S.getExtremeLine();
 	Point P1(0, 0);
@@ -189,10 +192,10 @@ void Render::drawFullShape(Shape S, Color C, Color Outline) {
 	Line L1(P1, P2);
 	//std::cout << L.getP1().getAbsis() << ", " << L.getP1().getOrdinat() << std::endl << "\r";
 	//std::cout << L.getP2().getAbsis() << ", " << L.getP2().getOrdinat() << std::endl << "\r";
-	for(int y = L.getP1().getOrdinat() + 1; y < L.getP2().getOrdinat(); ++y){
+	for(int y = L.getP1().getOrdinat() + 1 +y_start; y < L.getP2().getOrdinat()+y_start; ++y){
 		bool inside = false;
 		int meetLine = 0;
-		for(int x = L.getP1().getAbsis(); x < L.getP2().getAbsis(); ++x){
+		for(int x = L.getP1().getAbsis()+x_start; x < L.getP2().getAbsis()+x_start; ++x){
 			if(meetLine == 1){
 				inside = true;
 			}
@@ -239,37 +242,37 @@ void Render::clearScreen(){
 	memset(screen.getFrameBuffer(), 0, (screen.getColorDepth() / 8 * screen.getXRes() * screen.getYRes()));
 }
 
-void Render::doMotion(){
-	clearScreen();
-	for(int i = 0; i < asset_count; ++i){
-        drawAsset(i);
-    }
-	for(;;){
-        if(terminal.getIsInput() == State::RECEIVED){
-            char input = terminal.getInput();
-            switch (input)
-            {
-                case 'C':
-                    offset_x++;
-                    break;
-                case 'D':
-                    offset_x--;
-                    break;
-                default:
-                    break;
-            }
-			clearScreen();
-			for(int i = 0; i < asset_count; ++i){
-				drawAsset(i);
-			}
-            terminal.setIsInput(State::WAITING);
-        }
-        else if(terminal.getIsInput() == State::STOP){
-            terminal.exit();
-            break;
-        }
-    }
-}
+// void Render::doMotion(){
+// 	clearScreen();
+// 	for(int i = 0; i < asset_count; ++i){
+//         drawAsset(i);
+//     }
+// 	for(;;){
+//         if(terminal.getIsInput() == State::RECEIVED){
+//             char input = terminal.getInput();
+//             switch (input)
+//             {
+//                 case 'C':
+//                     offset_x++;
+//                     break;
+//                 case 'D':
+//                     offset_x--;
+//                     break;
+//                 default:
+//                     break;
+//             }
+// 			clearScreen();
+// 			for(int i = 0; i < asset_count; ++i){
+// 				drawAsset(i);
+// 			}
+//             terminal.setIsInput(State::WAITING);
+//         }
+//         else if(terminal.getIsInput() == State::STOP){
+//             terminal.exit();
+//             break;
+//         }
+//     }
+// }
 
 Input Render::getTerminal(){
 	return terminal;
