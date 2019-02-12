@@ -28,7 +28,7 @@ Color::Color(const Color &C) {
 }
 
 
-/** Getter and Setter **/
+/**& getter and Setter **/
 unsigned char Color::getAlpha() const {
     return this->a;
 }

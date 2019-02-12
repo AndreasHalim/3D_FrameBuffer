@@ -3,11 +3,11 @@
 
 #include <pthread.h>
 #include <iostream>
-enum class State {RECEIVED, WAITING, STOP};
+enum class State {RECEIVED = 0, WAITING = 1, STOP = 2};
 class Input{
     private:
         const char INTERRUPT_CHARACTER = 'A';
-        State isInput = State::WAITING;
+        int isInput = (int)State::WAITING;
         char input;
         pthread_t tid;
     public:
@@ -16,8 +16,8 @@ class Input{
         void *receiveInput();
         void *receiveInputArrowKey();
         void exit();
-        char getInput();
-        enum State getIsInput();
+        char& getInput();
+        int& getIsInput();
         void setIsInput(enum State);
 };
 

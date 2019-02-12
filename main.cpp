@@ -11,39 +11,35 @@ int main(){
     Point P1(0, 0);
     Point P2(700, 700);
     Line L(P1, P2);
+    R.loadAsset("peluru.txt");
     R.loadAsset("ship.txt");
     R.loadAsset("plane.txt");
-    for(int i = 0; i < 6; ++i){
-        R.drawAsset(i, screen.getXRes() / 3, screen.getYRes() / 2);
-    }
-    for(int i = 6; i < R.getAssetCount(); ++i){
-        R.drawAsset(i, 0, 0);
-    }
-    for(;;){
-        if(R.getTerminal().getIsInput() == State::RECEIVED){
-            char input = R.getTerminal().getInput();
-            std::cout << input << std::endl << "\r";
-            /* switch (input)
-            {
-                case 'C':
-                    R.offset_x++;
-                    break;
-                case 'D':
-                    R.offset_x--;
-                    break;
-                default:
-                    break;
-            }
-			R.clearScreen();
-			for(int i = 0; i < R.getAssetCount(); ++i){
-				R.drawAsset(i);
-			} */
-            R.getTerminal().setIsInput(State::WAITING);
-        }
-        else if(R.getTerminal().getIsInput() == State::STOP){
-            R.getTerminal().exit();
-            break;
-        }
-    }
+    R.doMotion();
+    // for(;;){
+    //     if(R.getTerminal().getIsInput() == (int)State::RECEIVED){
+    //         char input = R.getTerminal().getInput();
+    //         std::cout << input << std::endl << "\r";
+    //         /* switch (input)
+    //         {
+    //             case 'C':
+    //                 R.offset_x++;
+    //                 break;
+    //             case 'D':
+    //                 R.offset_x--;
+    //                 break;
+    //             default:
+    //                 break;
+    //         }
+	// 		R.clearScreen();
+	// 		for(int i = 0; i < R.getAssetCount(); ++i){
+	// 			R.drawAsset(i);
+	// 		} */
+    //         R.getTerminal().setIsInput(State::WAITING);
+    //     }
+    //     else if(R.getTerminal().getIsInput() == (int)State::STOP){
+    //         R.getTerminal().exit();
+    //         break;
+    //     }
+    // }
     return 0;
 }

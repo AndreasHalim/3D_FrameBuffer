@@ -24,7 +24,7 @@ class Canvas {
 		Canvas();
 		~Canvas();
 		char *getFrameBuffer();
-		int getFrameBufferDevice();
+		int& getFrameBufferDevice();
 		long int getScreenMemorySize();
 		int getXRes();
 		int getYRes();

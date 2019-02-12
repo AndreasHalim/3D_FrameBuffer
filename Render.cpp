@@ -17,12 +17,12 @@ Render::~Render() {
 
 }
 
-/** Getter and Setter **/
-Canvas Render::getScreen() const {
+/**& getter and Setter **/
+Canvas& Render::getScreen() {
 	return (this->screen);
 }
 
-int Render::getAssetCount() {
+int& Render::getAssetCount() {
 	return (this->asset_count);
 }
 
@@ -192,10 +192,10 @@ void Render::drawFullShape(Shape S, Color C, Color Outline, int x_start, int y_s
 	Line L1(P1, P2);
 	//std::cout << L.getP1().getAbsis() << ", " << L.getP1().getOrdinat() << std::endl << "\r";
 	//std::cout << L.getP2().getAbsis() << ", " << L.getP2().getOrdinat() << std::endl << "\r";
-	for(int y = L.getP1().getOrdinat() + 1 +y_start; y < L.getP2().getOrdinat()+y_start; ++y){
+	for(int y = L.getP1().getOrdinat() + 1 +y_start; y < L.getP2().getOrdinat()+y_start && y < screen.getYRes(); ++y){
 		bool inside = false;
 		int meetLine = 0;
-		for(int x = L.getP1().getAbsis()+x_start; x < L.getP2().getAbsis()+x_start; ++x){
+		for(int x = L.getP1().getAbsis()+x_start; x < L.getP2().getAbsis()+x_start && x < screen.getXRes(); ++x){
 			if(meetLine == 1){
 				inside = true;
 			}
@@ -242,39 +242,78 @@ void Render::clearScreen(){
 	memset(screen.getFrameBuffer(), 0, (screen.getColorDepth() / 8 * screen.getXRes() * screen.getYRes()));
 }
 
-// void Render::doMotion(){
-// 	clearScreen();
-// 	for(int i = 0; i < asset_count; ++i){
-//         drawAsset(i);
-//     }
-// 	for(;;){
-//         if(terminal.getIsInput() == State::RECEIVED){
-//             char input = terminal.getInput();
-//             switch (input)
-//             {
-//                 case 'C':
-//                     offset_x++;
-//                     break;
-//                 case 'D':
-//                     offset_x--;
-//                     break;
-//                 default:
-//                     break;
-//             }
-// 			clearScreen();
-// 			for(int i = 0; i < asset_count; ++i){
-// 				drawAsset(i);
-// 			}
-//             terminal.setIsInput(State::WAITING);
-//         }
-//         else if(terminal.getIsInput() == State::STOP){
-//             terminal.exit();
-//             break;
-//         }
-//     }
-// }
+void Render::clearArea(int x, int x_size, int y, int y_size){
+	for(int j = y; j < y + y_size; ++j)
+		memset(screen.getFrameBuffer() + j * screen.getLineLength() + screen.getColorDepth() / 8 * x, 0, screen.getColorDepth() / 8 * x_size);
+}
 
-Input Render::getTerminal(){
+void Render::doMotion(){
+	clearScreen();
+	int x_ship = screen.getXRes() / 3, y_ship = screen.getYRes() / 2, x_plane = screen.getXRes() - 300, y_plane = screen.getYRes() / 8;
+	int x_bullet, y_bullet;
+	bool bullet, ship;
+	for(int i = 1; i < 7; ++i){
+        drawAsset(i, x_ship, y_ship);
+    }
+	for(int i = 7; i < asset_count; ++i){
+        drawAsset(i, x_plane, y_plane);
+    }
+	for(;;){
+		if(bullet){
+			clearArea(x_bullet, 20, y_bullet, 20);
+			y_bullet -= 10;
+			drawAsset(0, x_bullet, y_bullet);
+		}
+		clearArea(x_plane, 400, y_plane, 400);
+		x_plane--;
+		if(x_plane < 0){
+			x_plane = screen.getXRes() - 300;
+		}
+		if(y_bullet < 0){
+			clearArea(x_bullet, 20, 0, 20);
+			bullet = false;
+		}
+		for(int i = 7; i < asset_count; ++i){
+				drawAsset(i, x_plane, y_plane);
+		}
+        if(terminal.getIsInput() == (int)State::RECEIVED){
+            clearArea(x_ship - 50, 450, y_ship - 50, 350);
+			char input = terminal.getInput();
+            switch (input)
+            {
+				case 'B':
+					if(!bullet){
+						bullet = true;
+						x_bullet = x_ship + 150;
+						y_bullet = y_ship - 30;
+					}
+					break;
+                case 'C':
+					ship = true;
+                    x_ship += 10;
+                    break;
+                case 'D':
+				ship = true;
+                    x_ship -= 10;
+                    break;
+                default:
+                    break;
+            }
+			if(ship){
+				for(int i = 1; i < 7; ++i){
+					drawAsset(i, x_ship, y_ship);
+				}
+			}
+            terminal.setIsInput(State::WAITING);
+        }
+        else if(terminal.getIsInput() == (int)State::STOP){
+            terminal.exit();
+            break;
+        }
+    }
+}
+
+Input& Render::getTerminal(){
 	return terminal;
 }
 

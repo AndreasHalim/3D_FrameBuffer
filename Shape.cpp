@@ -43,7 +43,7 @@ Shape::~Shape() {
 }
 
 
-/** Getter and Setter **/
+/**& getter and Setter **/
 unsigned int Shape::getAmount() const {
     return this->amount;
 }

@@ -22,7 +22,7 @@ Point::Point(const Point &P) {
 }
 
 
-/** Getter and Setter **/
+/**& getter and Setter **/
 unsigned int Point::getAbsis() const {
     return this->x;
 }

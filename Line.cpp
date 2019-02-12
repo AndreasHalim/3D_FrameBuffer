@@ -22,14 +22,14 @@ Line::Line(const Line &L) {
 }
 
 
-/** Getter and Setter **/
+/**& getter and Setter **/
 Point Line::getP1() const {
-/* Get First Point */
+/*& get First Point */
     return this->P1;
 }
 
 Point Line::getP2() const {
-/* Get Second Point */
+/*& get Second Point */
     return this->P2;
 }
 

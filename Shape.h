@@ -19,7 +19,7 @@ class Shape {
         Shape(const Shape &shape);
         ~Shape();
         
-        /* Getter and Setter */
+        /*& getter and Setter */
         unsigned int getAmount() const;
         unsigned int getNeff() const;
         void setAmount(int amount);

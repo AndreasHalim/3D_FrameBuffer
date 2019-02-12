@@ -27,9 +27,9 @@ class Render {
 		Render();
 		Render(const Render &R);
 		~Render();
-		/* Getter and Setter */
-		Canvas getScreen() const;
-		int getAssetCount();
+		/*& getter and Setter */
+		Canvas& getScreen();
+		int& getAssetCount();
 		/* Function and Procedure */
 		void drawPoint(Point P, Color C);
 		void drawLine(Line L, Color C);
@@ -39,7 +39,8 @@ class Render {
 		void drawFullShape(Shape S, Color C, Color Outline, int x_start, int y_start);
 		void drawEmptyShape(Shape S, Color Outline);
 		void clearScreen();	
-		Input getTerminal();
+		void clearArea(int x, int x_size, int y, int y_size);
+		Input& getTerminal();
 		Color getBGColor();
 };
 

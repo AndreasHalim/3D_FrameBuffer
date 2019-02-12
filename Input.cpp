@@ -10,15 +10,15 @@ Input::~Input(){
 }
 
 void * Input::receiveInput(){
-    while(isInput != State::STOP){
-		while(isInput == State::RECEIVED);
+    while(isInput != (int)State::STOP){
+		while(isInput == (int)State::RECEIVED);
 		if(input = getchar()){
 			std::cout << input << std::endl;
 			if(input == INTERRUPT_CHARACTER){
-				isInput = State::STOP;
+				isInput = (int)State::STOP;
 			}
 			else{
-				isInput = State::RECEIVED;
+				isInput = (int)State::RECEIVED;
 			}
 		}
 	}
@@ -26,18 +26,18 @@ void * Input::receiveInput(){
 }
 
 void * Input::receiveInputArrowKey(){
-    while(isInput != State::STOP){
-		while(isInput == State::RECEIVED);
+    while(isInput != (int)State::STOP){
+		while(isInput == (int)State::RECEIVED);
 		if(input = getchar()){
 			if(input == 27){
 				getchar();
 				input = getchar();
 			}
 			if(input == INTERRUPT_CHARACTER){
-				isInput = State::STOP;
+				isInput = (int)State::STOP;
 			}
 			else{
-				//isInput = State::RECEIVED;
+				isInput = (int)State::RECEIVED;
 			}
 		}
 	}
@@ -49,14 +49,14 @@ void Input::exit(){
 	pthread_exit(NULL);
 }
 
-char Input::getInput(){
+char& Input::getInput(){
     return input;
 }
 
-State Input::getIsInput(){
+int& Input::getIsInput(){
     return isInput;
 }
 
 void Input::setIsInput(State s){
-	isInput = s;
+	isInput = (int)s;
 }
