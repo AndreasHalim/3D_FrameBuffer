@@ -22,9 +22,10 @@ class Shape {
         /* Getter and Setter */
         unsigned int getAmount() const;
         unsigned int getNeff() const;
+        void setAmount(int amount);
         Line getLineAt(unsigned int idx) const;
         void setLineAt(unsigned int idx, Line line);
-        
+        Line getExtremeLine();
         /* Function and Procedure */
         void addLine(Line line);
         bool isClosed() const;

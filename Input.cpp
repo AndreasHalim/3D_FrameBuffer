@@ -37,7 +37,7 @@ void * Input::receiveInputArrowKey(){
 				isInput = State::STOP;
 			}
 			else{
-				//isInput = State::RECEIVED;
+				isInput = State::RECEIVED;
 			}
 		}
 	}
