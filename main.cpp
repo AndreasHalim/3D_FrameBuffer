@@ -9,6 +9,14 @@ int main(){
     Point P2(700, 700);
     Line L(P1, P2);
     R.drawLine(L, C);
-    while(1);
+    for(;;){
+        if(R.getTerminal().getIsInput() == State::RECEIVED){
+            R.getTerminal().setIsInput(State::WAITING);
+        }
+        else if(R.getTerminal().getIsInput() == State::STOP){
+            R.getTerminal().exit();
+            break;
+        }
+    }
     return 0;
 }

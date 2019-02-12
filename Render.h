@@ -8,13 +8,12 @@
 #include "Line.h"
 #include "Point.h"
 #include "Color.h"
+#include "Input.h"
 
 class Render {
 	private:
 		Canvas screen; // Screen size
-		enum state {RECEIVED, WAITING, STOP};
-		enum state isInput = WAITING;
-		char input;
+		Input terminal;
 	public:
 		/* Operator Empat Sekawan */
 		Render();
@@ -29,6 +28,7 @@ class Render {
 		void drawFullShape(Shape S, Color C);
 		void drawEmptyShape(Shape S, Color C);
 		void clearScreen();	
+		Input getTerminal();
 };
 
 #endif

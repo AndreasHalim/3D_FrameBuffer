@@ -4,7 +4,7 @@
 #include <math.h>
 
 /** Operator Empat Sekawan **/
-Render::Render():screen() {
+Render::Render():screen(), terminal() {
 /* Default Constructor */
 }
 
@@ -116,4 +116,8 @@ void Render::drawEmptyShape(Shape S, Color C){
 
 void Render::clearScreen(){
 	memset(screen.getFrameBuffer(), 0, (screen.getColorDepth() / 8 * screen.getXRes() * screen.getYRes()));
+}
+
+Input Render::getTerminal(){
+	return terminal;
 }
