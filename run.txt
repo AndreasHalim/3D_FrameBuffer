@@ -1,0 +1,1 @@
+g++ -Wall main.cpp -o a Point.cpp Render.cpp Canvas.cpp Line.cpp  Input.cpp Color.cpp Shape.cpp -lpthread -w

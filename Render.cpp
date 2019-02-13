@@ -251,7 +251,7 @@ void Render::doMotion(){
 	clearScreen();
 	int x_ship = screen.getXRes() / 3, y_ship = screen.getYRes() / 2, x_plane = screen.getXRes() - 300, y_plane = screen.getYRes() / 8;
 	int x_bullet, y_bullet;
-	bool bullet, ship;
+	bool bullet = false, ship = true;
 	for(int i = 1; i < 7; ++i){
         drawAsset(i, x_ship, y_ship);
     }
@@ -264,7 +264,7 @@ void Render::doMotion(){
 			y_bullet -= 10;
 			drawAsset(0, x_bullet, y_bullet);
 		}
-		clearArea(x_plane, 400, y_plane, 400);
+		clearArea(x_plane, 400, y_plane, 250);
 		x_plane--;
 		if(x_plane < 0){
 			x_plane = screen.getXRes() - 300;
